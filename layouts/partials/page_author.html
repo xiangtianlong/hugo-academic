@@ -6,14 +6,14 @@
 {{/* Display superuser if superuser exists and page authors are not explicitly specified. */}}
 {{/* Otherwise, display first author if a profile for them exists. */}}
 
-{{ $author_urlized := "" }}
+{{ $author_anchorized := "" }}
 {{ if and (not .Params.authors) (.Scratch.Get "superuser_username") }}
-  {{ $author_urlized = (.Scratch.Get "superuser_username") }}
-  {{ partial "page_author_card" (dict "username" $author_urlized) }}
+  {{ $author_anchorized = (.Scratch.Get "superuser_username") }}
+  {{ partial "page_author_card" (dict "username" $author_anchorized) }}
 {{ else if .Params.authors }}
   {{ range $key, $tmp_username := .Params.authors }}
-    {{ $author_urlized = urlize $tmp_username }}
-    {{ partial "page_author_card" (dict "username" $author_urlized) }}
+    {{ $author_anchorized = anchorize $tmp_username }}
+    {{ partial "page_author_card" (dict "username" $author_anchorized) }}
   {{ end }}
 {{ end }}
 
